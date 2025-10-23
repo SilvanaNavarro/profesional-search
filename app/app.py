@@ -128,6 +128,27 @@ app.add_page(
 app.add_page(about_page, route="/about")
 app.add_page(contact_page, route="/contact")
 app.add_page(login_page, route="/login")
+from app.pages.login_professional import login_professional_page
+
+app.add_page(login_professional_page, route="/login-professional")
+from app.pages.professional_dashboard import professional_dashboard_page
+from app.states.professional_dashboard_state import DashboardState
+from app.states.schedule_state import ScheduleManagementState
+from app.states.review_state import ReviewState
+from app.states.profile_settings_state import ProfileSettingsState
+from app.states.subscription_state import SubscriptionState
+
+app.add_page(
+    professional_dashboard_page,
+    route="/professional-dashboard",
+    on_load=[
+        DashboardState.load_dashboard_data,
+        ScheduleManagementState.load_schedule_data,
+        ReviewState.on_dashboard_load,
+        ProfileSettingsState.load_professional_data,
+        SubscriptionState.load_subscription_data,
+    ],
+)
 app.add_page(verify_email_page, route="/verify-email")
 app.add_page(search_page, route="/search", on_load=SearchState.load_professionals)
 from app.pages.register import register_page

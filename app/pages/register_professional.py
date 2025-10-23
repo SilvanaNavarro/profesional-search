@@ -106,6 +106,53 @@ def register_professional_page() -> rx.Component:
                                 class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-24 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                             ),
                         ),
+                        rx.el.div(
+                            rx.el.label(
+                                "Email",
+                                class_name="block text-sm font-medium text-gray-700 mb-1",
+                            ),
+                            rx.el.input(
+                                name="email",
+                                placeholder="tu@email.com",
+                                type="email",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+                            ),
+                        ),
+                        rx.el.div(
+                            rx.el.label(
+                                "Teléfono (Opcional)",
+                                class_name="block text-sm font-medium text-gray-700 mb-1",
+                            ),
+                            rx.el.input(
+                                name="phone",
+                                placeholder="+56 9 1234 5678",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+                            ),
+                        ),
+                        rx.el.div(
+                            rx.el.label(
+                                "Contraseña",
+                                class_name="block text-sm font-medium text-gray-700 mb-1",
+                            ),
+                            rx.el.input(
+                                name="password",
+                                placeholder="••••••••",
+                                type="password",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+                            ),
+                        ),
+                        rx.el.div(
+                            rx.el.label(
+                                "Confirmar Contraseña",
+                                class_name="block text-sm font-medium text-gray-700 mb-1",
+                            ),
+                            rx.el.input(
+                                name="confirm_password",
+                                placeholder="••••••••",
+                                type="password",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+                            ),
+                        ),
                         upload_component(
                             "profile_pic",
                             "Foto de Perfil",
@@ -148,10 +195,14 @@ def register_professional_page() -> rx.Component:
                     reset_on_submit=False,
                     class_name="mt-8 w-full",
                 ),
-                rx.el.a(
-                    "Volver a la página principal",
-                    href="/",
-                    class_name="text-center text-sm text-blue-600 hover:underline dark:text-blue-400 mt-6 block",
+                rx.el.p(
+                    "¿Ya tienes una cuenta? ",
+                    rx.el.a(
+                        "Inicia sesión aquí",
+                        href="/login-professional",
+                        class_name="font-semibold text-blue-600 hover:underline dark:text-blue-400",
+                    ),
+                    class_name="text-center text-sm text-gray-600 dark:text-gray-300 pt-6",
                 ),
                 class_name="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 max-w-2xl w-full",
             ),

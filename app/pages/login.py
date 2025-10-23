@@ -65,6 +65,15 @@ def login_page() -> rx.Component:
                         ),
                         class_name="text-center text-sm text-gray-600 pt-4",
                     ),
+                    rx.el.p(
+                        "¿Eres un profesional? ",
+                        rx.el.a(
+                            "Inicia sesión aquí",
+                            href="/login-professional",
+                            class_name="font-semibold text-blue-600 hover:underline dark:text-blue-400",
+                        ),
+                        class_name="text-center text-sm text-gray-600 pt-2",
+                    ),
                     class_name="mt-8 space-y-6 w-full",
                 ),
                 class_name="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 max-w-md w-full",
