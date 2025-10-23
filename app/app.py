@@ -1,5 +1,6 @@
 import reflex as rx
 from app.state import State
+from app.states.theme_state import ThemeState
 from app.states.profile_state import BookingState
 from app.states.page_state import SearchState
 from app.states.payment_state import PaymentState
@@ -25,28 +26,28 @@ def index() -> rx.Component:
                 rx.el.div(
                     rx.el.h2(
                         "¿Eres un profesional?",
-                        class_name="text-3xl font-bold text-gray-800",
+                        class_name="text-3xl font-bold text-gray-800 dark:text-white",
                     ),
                     rx.el.p(
-                        "Únete a nuestra creciente red de expertos y expande tu alcance.",
-                        class_name="mt-2 text-lg text-gray-500",
+                        "Ùnete a nuestra creciente red de expertos y expande tu alcance.",
+                        class_name="mt-2 text-lg text-gray-500 dark:text-gray-300",
                     ),
                     rx.el.a(
                         rx.el.button(
                             "Regístrate como Profesional",
                             rx.icon("user-plus", class_name="ml-2 h-5 w-5"),
-                            class_name="mt-6 bg-gray-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 flex items-center",
+                            class_name="mt-6 bg-gradient-to-r from-blue-800 to-green-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:from-blue-700 hover:to-green-400 transition-all duration-300 transform hover:scale-105 flex items-center",
                         ),
                         href="/register-professional",
                     ),
-                    class_name="text-center",
+                    class_name="text-center bg-white dark:bg-gray-800 p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700",
                 ),
                 class_name="container mx-auto px-4 sm:px-6 lg:px-8",
             ),
-            class_name="py-20 bg-white",
+            class_name="py-20 bg-gray-50 dark:bg-blue-900",
         ),
         video_section(),
-        class_name="font-['JetBrains_Mono'] bg-white",
+        class_name="font-['JetBrains_Mono'] bg-white dark:bg-blue-900",
         on_mount=State.rotate_area,
     )
 
@@ -109,8 +110,9 @@ def webhook(payload: dict) -> dict:
 
 
 app = rx.App(
-    theme=rx.theme(appearance="light"),
+    theme=rx.theme(appearance="light", accent_color="orange"),
     head_components=[
+        rx.el.script(src="/theme.js"),
         rx.el.link(rel="preconnect", href="https://fonts.googleapis.com"),
         rx.el.link(rel="preconnect", href="https://fonts.gstatic.com", cross_origin=""),
         rx.el.link(
