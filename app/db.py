@@ -22,6 +22,7 @@ class Professional(SQLModel, table=True):
     phone: Optional[str] = None
     password_hash: str
     description_services: str
+    city: Optional[str] = None
     photo_profile_path: Optional[str] = None
     photo_id_card_path: Optional[str] = None
     certificate_path: Optional[str] = None

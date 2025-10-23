@@ -34,22 +34,37 @@ def profile_page() -> rx.Component:
                             ),
                             rx.el.div(
                                 rx.el.h1(
-                                    BookingState.current_professional["name"],
+                                    BookingState.current_professional[
+                                        "name"
+                                    ].to_string(),
                                     class_name="text-3xl font-bold text-gray-800 mb-2",
                                 ),
                                 rx.el.p(
-                                    BookingState.current_professional["title"],
+                                    BookingState.current_professional[
+                                        "title"
+                                    ].to_string(),
                                     class_name="text-lg font-medium text-blue-600 dark:text-blue-400 mb-4",
                                 ),
                                 rx.el.div(
                                     rx.el.span(
-                                        BookingState.current_professional["area"],
+                                        BookingState.current_professional[
+                                            "area"
+                                        ].to_string(),
                                         class_name="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium dark:bg-blue-900 dark:text-blue-300",
+                                    ),
+                                    rx.el.span(
+                                        rx.icon("map-pin", class_name="h-4 w-4 mr-1.5"),
+                                        BookingState.current_professional[
+                                            "city"
+                                        ].to_string(),
+                                        class_name="inline-flex items-center bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium dark:bg-gray-700 dark:text-gray-300 ml-2",
                                     ),
                                     class_name="mb-6",
                                 ),
                                 rx.el.p(
-                                    BookingState.current_professional["description"],
+                                    BookingState.current_professional[
+                                        "description"
+                                    ].to_string(),
                                     class_name="text-gray-600 leading-relaxed",
                                 ),
                                 class_name="md:w-2/3 md:pl-8",

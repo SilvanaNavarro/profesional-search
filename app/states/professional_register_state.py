@@ -14,6 +14,18 @@ class ProfessionalRegisterState(rx.State):
     photo_profile_path: str = ""
     photo_id_card_path: str = ""
     certificate_path: str = ""
+    cities: list[str] = [
+        "Santiago",
+        "Valparaíso",
+        "Concepción",
+        "La Serena",
+        "Antofagasta",
+        "Temuco",
+        "Iquique",
+        "Puerto Montt",
+        "Rancagua",
+        "Talca",
+    ]
 
     @rx.event
     async def handle_registration(self, form_data: dict):
@@ -25,10 +37,13 @@ class ProfessionalRegisterState(rx.State):
         rut = form_data.get("rut")
         email = form_data.get("email")
         phone = form_data.get("phone")
+        city = form_data.get("city")
         password = form_data.get("password")
         confirm_password = form_data.get("confirm_password")
         description = form_data.get("description_services")
-        if not all([name, career, rut, email, password, confirm_password, description]):
+        if not all(
+            [name, career, rut, email, password, confirm_password, description, city]
+        ):
             self.error_message = (
                 "Todos los campos, excepto el teléfono, son obligatorios."
             )
@@ -79,6 +94,7 @@ class ProfessionalRegisterState(rx.State):
                 phone=phone,
                 password_hash=hash_password(password),
                 description_services=description,
+                city=city,
                 photo_profile_path=self.photo_profile_path,
                 photo_id_card_path=self.photo_id_card_path,
                 certificate_path=self.certificate_path,

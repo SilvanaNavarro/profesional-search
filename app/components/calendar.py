@@ -83,7 +83,7 @@ def calendar_component() -> rx.Component:
                                 class_name="text-md font-semibold text-gray-800 mb-2",
                             ),
                             rx.el.p(
-                                f"Fecha: {BookingState.selected_date}",
+                                f"Fecha: {BookingState.formatted_selected_date}",
                                 class_name="text-sm text-gray-600 mb-1",
                             ),
                             rx.el.p(
