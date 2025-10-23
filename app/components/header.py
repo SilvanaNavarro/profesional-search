@@ -6,7 +6,6 @@ def header() -> rx.Component:
         {"name": "Sobre Nosotros", "href": "/about"},
         {"name": "Contáctanos", "href": "/contact"},
         {"name": "¿Eres Profesional?", "href": "/register-professional"},
-        {"name": "Log in", "href": "/login"},
         {"name": "Buscar Profesionales", "href": "/search"},
     ]
     return rx.el.header(
@@ -39,7 +38,13 @@ def header() -> rx.Component:
                             class_name="text-sm font-medium text-gray-600 hover:text-orange-500 transition-colors px-3 py-2 rounded-md",
                         ),
                     ),
-                    class_name="hidden md:flex items-center space-x-2",
+                    rx.el.a(
+                        rx.icon("user", class_name="h-4 w-4 mr-2"),
+                        "Log in",
+                        href="/login",
+                        class_name="flex items-center bg-orange-500 text-white font-semibold px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors shadow-sm",
+                    ),
+                    class_name="hidden md:flex items-center space-x-4",
                 ),
                 rx.el.button(
                     rx.icon("menu", class_name="h-6 w-6"),

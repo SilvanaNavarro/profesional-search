@@ -20,6 +20,31 @@ def index() -> rx.Component:
         header(),
         hero_section(),
         professional_carousel(),
+        rx.el.section(
+            rx.el.div(
+                rx.el.div(
+                    rx.el.h2(
+                        "¿Eres un profesional?",
+                        class_name="text-3xl font-bold text-gray-800",
+                    ),
+                    rx.el.p(
+                        "Únete a nuestra creciente red de expertos y expande tu alcance.",
+                        class_name="mt-2 text-lg text-gray-500",
+                    ),
+                    rx.el.a(
+                        rx.el.button(
+                            "Regístrate como Profesional",
+                            rx.icon("user-plus", class_name="ml-2 h-5 w-5"),
+                            class_name="mt-6 bg-gray-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 flex items-center",
+                        ),
+                        href="/register-professional",
+                    ),
+                    class_name="text-center",
+                ),
+                class_name="container mx-auto px-4 sm:px-6 lg:px-8",
+            ),
+            class_name="py-20 bg-white",
+        ),
         video_section(),
         class_name="font-['JetBrains_Mono'] bg-white",
         on_mount=State.rotate_area,

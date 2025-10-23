@@ -25,15 +25,7 @@ def hero_section() -> rx.Component:
                         ),
                         href="/search",
                     ),
-                    rx.el.a(
-                        rx.el.button(
-                            "Regístrate como Profesional",
-                            rx.icon("user-plus", class_name="ml-2 h-5 w-5"),
-                            class_name="bg-gray-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 flex items-center",
-                        ),
-                        href="/register-professional",
-                    ),
-                    class_name="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4",
+                    class_name="mt-10 flex justify-center",
                 ),
                 class_name="max-w-4xl mx-auto",
             ),
