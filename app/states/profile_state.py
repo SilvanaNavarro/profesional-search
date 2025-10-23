@@ -11,7 +11,8 @@ class TimeSlot(TypedDict):
 
 
 class BookingState(rx.State):
-    selected_professional_id: int = 1
+    selected_professional_id: int = 0
+    current_professional_data: dict | None = None
     selected_date: str = ""
     selected_time: str = ""
     booking_confirmed: bool = False
@@ -22,12 +23,7 @@ class BookingState(rx.State):
 
     @rx.var
     def current_professional(self) -> dict | None:
-        from app.state import professionals_data
-
-        for prof in professionals_data:
-            if prof["id"] == self.selected_professional_id:
-                return prof
-        return None
+        return self.current_professional_data
 
     @rx.var
     def available_dates(self) -> list[str]:
@@ -131,16 +127,29 @@ class BookingState(rx.State):
 
     @rx.event
     def load_professional(self):
+        from app.db import Professional
+        from app.state import professionals_data, map_professional_to_dict
+
         self.current_month_display = datetime.now()
-        prof_id = self.router.page.params.get("id")
-        if prof_id:
-            self.selected_professional_id = int(prof_id)
+        prof_id_str = self.router.page.params.get("id")
+        if not prof_id_str:
+            self.current_professional_data = None
+            return
+        prof_id = int(prof_id_str)
+        self.selected_professional_id = prof_id
+        with rx.session() as session:
+            db_professional = session.get(Professional, prof_id)
+        if db_professional:
+            self.current_professional_data = map_professional_to_dict(db_professional)
         else:
-            self.selected_professional_id = 1
+            found_prof = next(
+                (p for p in professionals_data if p["id"] == prof_id), None
+            )
+            self.current_professional_data = found_prof
         query_date = self.router.page.params.get("date")
         query_time = self.router.page.params.get("time")
-        self.selected_date = query_date if query_date else ""
-        self.selected_time = query_time if query_time else ""
+        self.selected_date = query_date or ""
+        self.selected_time = query_time or ""
         self.booking_confirmed = False
 
     @rx.event
