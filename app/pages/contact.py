@@ -29,7 +29,7 @@ def contact_page() -> rx.Component:
                                 rx.el.input(
                                     placeholder="Tu nombre",
                                     name="name",
-                                    class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                    class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                                 ),
                             ),
                             rx.el.div(
@@ -41,7 +41,7 @@ def contact_page() -> rx.Component:
                                     placeholder="tu@email.com",
                                     name="email",
                                     type="email",
-                                    class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                    class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                                 ),
                             ),
                             rx.el.div(
@@ -52,7 +52,7 @@ def contact_page() -> rx.Component:
                                 rx.el.input(
                                     placeholder="+56 9 1234 5678",
                                     name="phone",
-                                    class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                    class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                                 ),
                             ),
                             rx.el.div(
@@ -63,13 +63,13 @@ def contact_page() -> rx.Component:
                                 rx.el.textarea(
                                     placeholder="Escribe tu mensaje aquí...",
                                     name="message",
-                                    class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 h-32",
+                                    class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-32 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                                 ),
                             ),
                             rx.el.button(
                                 "Enviar Mensaje",
                                 type="submit",
-                                class_name="w-full bg-orange-500 text-white font-semibold px-6 py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg",
+                                class_name="w-full bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold px-6 py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors shadow-lg",
                             ),
                             class_name="space-y-6",
                         ),
@@ -82,5 +82,5 @@ def contact_page() -> rx.Component:
             ),
             class_name="container mx-auto px-4 sm:px-6 lg:px-8 py-16",
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50 min-h-screen",
+        class_name="font-['JetBrains_Mono'] bg-white dark:bg-blue-950 min-h-screen",
     )

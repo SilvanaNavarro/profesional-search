@@ -17,7 +17,7 @@ def professional_card(professional: rx.Var) -> rx.Component:
                 ),
                 rx.el.p(
                     professional["title"],
-                    class_name="text-sm font-medium text-orange-500",
+                    class_name="text-sm font-medium text-blue-600 dark:text-blue-400",
                 ),
                 rx.el.p(
                     professional["description"],
@@ -29,7 +29,7 @@ def professional_card(professional: rx.Var) -> rx.Component:
                 rx.el.span(
                     "Ver Perfil",
                     rx.icon("arrow-right", class_name="ml-2 h-4 w-4"),
-                    class_name="inline-flex items-center text-sm font-semibold text-orange-500",
+                    class_name="inline-flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400",
                 ),
                 class_name="p-5 mt-auto border-t border-gray-100",
             ),
@@ -63,5 +63,5 @@ def professional_carousel() -> rx.Component:
             ),
             class_name="container mx-auto px-4 sm:px-6 lg:px-8",
         ),
-        class_name="py-20 bg-gray-50",
+        class_name="py-20 bg-gray-50 dark:bg-gray-800",
     )

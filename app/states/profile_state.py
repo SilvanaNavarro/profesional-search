@@ -122,7 +122,7 @@ class BookingState(rx.State):
     async def initiate_payment_process(self):
         from app.states.auth_state import AuthState
         from app.states.payment_state import PaymentState
-        from app.db import User, Booking
+        from app.db import User, Booking, ProfessionalAvailability
         from sqlmodel import select
         import datetime
 
@@ -154,9 +154,57 @@ class BookingState(rx.State):
             session.commit()
             session.refresh(new_booking)
             booking_id = new_booking.id
+            availability_slot = session.exec(
+                select(ProfessionalAvailability).where(
+                    ProfessionalAvailability.professional_id
+                    == self.current_professional["id"],
+                    ProfessionalAvailability.date == self.selected_date,
+                    ProfessionalAvailability.time_slot == self.selected_time,
+                )
+            ).first()
+            if availability_slot:
+                availability_slot.is_booked = True
+                availability_slot.is_available = False
+            else:
+                availability_slot = ProfessionalAvailability(
+                    professional_id=self.current_professional["id"],
+                    date=self.selected_date,
+                    time_slot=self.selected_time,
+                    is_available=False,
+                    is_booked=True,
+                )
+            session.add(availability_slot)
+            session.commit()
         if booking_id:
             payment_state = await self.get_state(PaymentState)
             yield PaymentState.create_checkout_session(booking_id, 25000)
+
+    @rx.event
+    def submit_review(self, booking_id: int, rating: int, comment: str):
+        from app.db import Review
+        from app.states.auth_state import AuthState
+        import datetime
+
+        with rx.session() as session:
+            booking = session.get(Booking, booking_id)
+            if not booking:
+                return rx.toast.error("Reserva no encontrada.")
+            existing_review = session.exec(
+                select(Review).where(Review.booking_id == booking_id)
+            ).first()
+            if existing_review:
+                return rx.toast.error("Ya has dejado una reseña para esta cita.")
+            new_review = Review(
+                user_id=booking.user_id,
+                professional_id=booking.professional_id,
+                booking_id=booking_id,
+                rating=rating,
+                comment=comment,
+                created_at=datetime.datetime.now().isoformat(),
+            )
+            session.add(new_review)
+            session.commit()
+        return rx.toast.success("Gracias por tu reseña!")
 
     @rx.event
     def close_confirmation(self):

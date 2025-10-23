@@ -1,5 +1,6 @@
 import reflex as rx
 from app.state import State
+from app.states.theme_state import ThemeState
 from app.states.profile_state import BookingState
 from app.states.page_state import SearchState
 from app.states.payment_state import PaymentState
@@ -25,28 +26,28 @@ def index() -> rx.Component:
                 rx.el.div(
                     rx.el.h2(
                         "¿Eres un profesional?",
-                        class_name="text-3xl font-bold text-gray-800",
+                        class_name="text-3xl font-bold text-gray-800 dark:text-white",
                     ),
                     rx.el.p(
-                        "Únete a nuestra creciente red de expertos y expande tu alcance.",
-                        class_name="mt-2 text-lg text-gray-500",
+                        "Ùnete a nuestra creciente red de expertos y expande tu alcance.",
+                        class_name="mt-2 text-lg text-gray-500 dark:text-gray-300",
                     ),
                     rx.el.a(
                         rx.el.button(
                             "Regístrate como Profesional",
                             rx.icon("user-plus", class_name="ml-2 h-5 w-5"),
-                            class_name="mt-6 bg-gray-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 flex items-center",
+                            class_name="mt-6 bg-gradient-to-r from-blue-800 to-green-500 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:from-blue-700 hover:to-green-400 transition-all duration-300 transform hover:scale-105 flex items-center",
                         ),
                         href="/register-professional",
                     ),
-                    class_name="text-center",
+                    class_name="text-center bg-white dark:bg-gray-800 p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700",
                 ),
                 class_name="container mx-auto px-4 sm:px-6 lg:px-8",
             ),
-            class_name="py-20 bg-white",
+            class_name="py-20 bg-gray-50 dark:bg-blue-900",
         ),
         video_section(),
-        class_name="font-['JetBrains_Mono'] bg-white",
+        class_name="font-['JetBrains_Mono'] bg-white dark:bg-blue-950",
         on_mount=State.rotate_area,
     )
 
@@ -109,7 +110,8 @@ def webhook(payload: dict) -> dict:
 
 
 app = rx.App(
-    theme=rx.theme(appearance="light"),
+    theme=rx.theme(appearance="light", accent_color="grass"),
+    stylesheets=["/styles.css"],
     head_components=[
         rx.el.link(rel="preconnect", href="https://fonts.googleapis.com"),
         rx.el.link(rel="preconnect", href="https://fonts.gstatic.com", cross_origin=""),
@@ -118,7 +120,6 @@ app = rx.App(
             rel="stylesheet",
         ),
     ],
-    api_transformer=api,
 )
 app.add_page(index, route="/")
 app.add_page(
@@ -127,6 +128,27 @@ app.add_page(
 app.add_page(about_page, route="/about")
 app.add_page(contact_page, route="/contact")
 app.add_page(login_page, route="/login")
+from app.pages.login_professional import login_professional_page
+
+app.add_page(login_professional_page, route="/login-professional")
+from app.pages.professional_dashboard import professional_dashboard_page
+from app.states.professional_dashboard_state import DashboardState
+from app.states.schedule_state import ScheduleManagementState
+from app.states.review_state import ReviewState
+from app.states.profile_settings_state import ProfileSettingsState
+from app.states.subscription_state import SubscriptionState
+
+app.add_page(
+    professional_dashboard_page,
+    route="/professional-dashboard",
+    on_load=[
+        DashboardState.load_dashboard_data,
+        ScheduleManagementState.load_schedule_data,
+        ReviewState.on_dashboard_load,
+        ProfileSettingsState.load_professional_data,
+        SubscriptionState.load_subscription_data,
+    ],
+)
 app.add_page(verify_email_page, route="/verify-email")
 app.add_page(search_page, route="/search", on_load=SearchState.load_professionals)
 from app.pages.register import register_page
@@ -141,8 +163,6 @@ from app.pages.payment_status import (
     payment_pending_page,
 )
 
-app.add_page(payment_success_page, route="/payment-success")
-app.add_page(payment_failure_page, route="/payment-failure")
 app.add_page(
     payment_success_page,
     route="/payment-success",
@@ -158,8 +178,19 @@ app.add_page(
     route="/payment-pending",
     on_load=PaymentState.load_payment_details,
 )
-from app.db import User, Professional, Booking
+from app.db import (
+    User,
+    Professional,
+    Booking,
+    ProfessionalAvailability,
+    Review,
+    Subscription,
+    ProfessionalMedia,
+)
 from sqlmodel import SQLModel
+import os
 
+if os.path.exists("reflex.db"):
+    os.remove("reflex.db")
 with rx.session() as session:
     SQLModel.metadata.create_all(session.get_bind())

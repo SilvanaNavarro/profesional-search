@@ -78,7 +78,7 @@ def status_page_layout(
                     rx.el.a(
                         rx.el.button(
                             button_text,
-                            class_name="bg-orange-500 text-white font-semibold px-8 py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg",
+                            class_name="bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold px-8 py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors shadow-lg",
                         ),
                         href=button_href,
                     ),
@@ -88,7 +88,7 @@ def status_page_layout(
             ),
             class_name="flex items-center justify-center min-h-[80vh]",
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50",
+        class_name="font-['JetBrains_Mono'] bg-white dark:bg-blue-950",
         on_mount=PaymentState.load_payment_details,
     )
 

@@ -26,7 +26,7 @@ def login_page() -> rx.Component:
                             placeholder="tu@email.com",
                             type="email",
                             on_change=LoginState.set_email,
-                            class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                            class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                         ),
                         class_name="w-full",
                     ),
@@ -39,7 +39,7 @@ def login_page() -> rx.Component:
                             placeholder="\tu2022\tu2022\tu2022\tu2022\tu2022\tu2022\tu2022\tu2022",
                             type="password",
                             on_change=LoginState.set_password,
-                            class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                            class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                         ),
                         class_name="w-full",
                     ),
@@ -54,16 +54,25 @@ def login_page() -> rx.Component:
                     rx.el.button(
                         "Entrar",
                         on_click=LoginState.handle_login,
-                        class_name="w-full bg-orange-500 text-white font-semibold px-6 py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg",
+                        class_name="w-full bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold px-6 py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors shadow-lg",
                     ),
                     rx.el.p(
                         "¿No tienes cuenta? ",
                         rx.el.a(
                             "Crea una aquí",
                             href="/register",
-                            class_name="font-semibold text-orange-500 hover:underline",
+                            class_name="font-semibold text-blue-600 hover:underline dark:text-blue-400",
                         ),
                         class_name="text-center text-sm text-gray-600 pt-4",
+                    ),
+                    rx.el.p(
+                        "¿Eres un profesional? ",
+                        rx.el.a(
+                            "Inicia sesión aquí",
+                            href="/login-professional",
+                            class_name="font-semibold text-blue-600 hover:underline dark:text-blue-400",
+                        ),
+                        class_name="text-center text-sm text-gray-600 pt-2",
                     ),
                     class_name="mt-8 space-y-6 w-full",
                 ),
@@ -71,5 +80,5 @@ def login_page() -> rx.Component:
             ),
             class_name="flex items-center justify-center min-h-[80vh]",
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50",
+        class_name="font-['JetBrains_Mono'] bg-gray-50 dark:bg-blue-950",
     )

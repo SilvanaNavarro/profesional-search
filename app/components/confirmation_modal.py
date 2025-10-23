@@ -23,11 +23,11 @@ def confirmation_modal() -> rx.Component:
                         ),
                         rx.el.div(
                             rx.el.p(
-                                f"📅 {BookingState.selected_date}",
+                                f"⌚ {BookingState.selected_date}",
                                 class_name="text-lg font-semibold text-gray-800",
                             ),
                             rx.el.p(
-                                f"🕒 {BookingState.selected_time}",
+                                f"⏲ {BookingState.selected_time}",
                                 class_name="text-lg font-semibold text-gray-800",
                             ),
                             class_name="bg-green-50 p-4 rounded-xl border border-green-200 mb-6 text-center",
@@ -40,7 +40,7 @@ def confirmation_modal() -> rx.Component:
                             rx.el.button(
                                 "Cerrar",
                                 on_click=BookingState.close_confirmation,
-                                class_name="bg-orange-500 text-white font-semibold px-8 py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg",
+                                class_name="bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold px-8 py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors shadow-lg",
                             ),
                             class_name="text-center",
                         ),

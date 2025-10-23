@@ -26,7 +26,7 @@ def register_page() -> rx.Component:
                             rx.el.input(
                                 name="name",
                                 placeholder="Tu nombre y apellido",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -37,7 +37,7 @@ def register_page() -> rx.Component:
                             rx.el.input(
                                 name="birthdate",
                                 type="date",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -48,7 +48,7 @@ def register_page() -> rx.Component:
                             rx.el.input(
                                 name="rut",
                                 placeholder="12.345.678-9",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -60,7 +60,7 @@ def register_page() -> rx.Component:
                                 name="email",
                                 placeholder="tu@email.com",
                                 type="email",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -71,7 +71,7 @@ def register_page() -> rx.Component:
                             rx.el.input(
                                 name="phone",
                                 placeholder="+56 9 1234 5678",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -83,7 +83,7 @@ def register_page() -> rx.Component:
                                 name="password",
                                 placeholder="••••••••",
                                 type="password",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -95,7 +95,7 @@ def register_page() -> rx.Component:
                                 name="confirm_password",
                                 placeholder="••••••••",
                                 type="password",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white",
                             ),
                         ),
                         class_name="space-y-4",
@@ -111,7 +111,7 @@ def register_page() -> rx.Component:
                     rx.el.button(
                         "Crear Cuenta",
                         type="submit",
-                        class_name="w-full bg-orange-500 text-white font-semibold py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg mt-6",
+                        class_name="w-full bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors shadow-lg mt-6",
                     ),
                     on_submit=AuthState.handle_registration,
                     reset_on_submit=False,
@@ -122,13 +122,13 @@ def register_page() -> rx.Component:
                     rx.el.a(
                         "Inicia sesión aquí",
                         href="/login",
-                        class_name="font-semibold text-orange-500 hover:underline",
+                        class_name="font-semibold text-blue-600 hover:underline dark:text-blue-400",
                     ),
-                    class_name="text-center text-sm text-gray-600 pt-6",
+                    class_name="text-center text-sm text-gray-600 dark:text-gray-300 pt-6",
                 ),
                 class_name="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 max-w-lg w-full",
             ),
             class_name="flex items-center justify-center min-h-[90vh] py-10",
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50",
+        class_name="font-['JetBrains_Mono'] bg-gray-50 dark:bg-blue-950",
     )

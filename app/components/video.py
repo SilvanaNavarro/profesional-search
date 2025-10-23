@@ -30,5 +30,5 @@ def video_section() -> rx.Component:
             ),
             class_name="container mx-auto px-4 sm:px-6 lg:px-8",
         ),
-        class_name="py-20 bg-white",
+        class_name="py-20 bg-white dark:bg-blue-950",
     )

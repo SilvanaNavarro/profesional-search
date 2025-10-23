@@ -23,9 +23,23 @@ class ProfessionalRegisterState(rx.State):
         name = form_data.get("name")
         career = form_data.get("career")
         rut = form_data.get("rut")
+        email = form_data.get("email")
+        phone = form_data.get("phone")
+        password = form_data.get("password")
+        confirm_password = form_data.get("confirm_password")
         description = form_data.get("description_services")
-        if not all([name, career, rut, description]):
-            self.error_message = "Todos los campos de texto son obligatorios."
+        if not all([name, career, rut, email, password, confirm_password, description]):
+            self.error_message = (
+                "Todos los campos, excepto el teléfono, son obligatorios."
+            )
+            self.processing = False
+            return
+        if password != confirm_password:
+            self.error_message = "Las contraseñas no coinciden."
+            self.processing = False
+            return
+        if not re.match("[^@]+@[^@]+\\.[^@]+", email):
+            self.error_message = "Formato de email inválido."
             self.processing = False
             return
         if not is_valid_rut(rut):
@@ -40,6 +54,8 @@ class ProfessionalRegisterState(rx.State):
             self.error_message = "Debe subir todos los archivos requeridos."
             self.processing = False
             return
+        from app.states.auth_state import hash_password
+
         with rx.session() as session:
             existing_rut = session.exec(
                 select(Professional).where(Professional.rut == rut)
@@ -48,16 +64,34 @@ class ProfessionalRegisterState(rx.State):
                 self.error_message = "El RUT ya está registrado como profesional."
                 self.processing = False
                 return
+            existing_email = session.exec(
+                select(Professional).where(Professional.email == email)
+            ).first()
+            if existing_email:
+                self.error_message = "El email ya está registrado como profesional."
+                self.processing = False
+                return
             new_professional = Professional(
                 name=name,
                 career=career,
                 rut=rut,
+                email=email,
+                phone=phone,
+                password_hash=hash_password(password),
                 description_services=description,
                 photo_profile_path=self.photo_profile_path,
                 photo_id_card_path=self.photo_id_card_path,
                 certificate_path=self.certificate_path,
             )
             session.add(new_professional)
+            session.commit()
+            session.refresh(new_professional)
+            from app.db import Subscription
+
+            new_subscription = Subscription(
+                professional_id=new_professional.id, plan="basico", status="active"
+            )
+            session.add(new_subscription)
             session.commit()
         yield rx.toast.success("Registro enviado. Será revisado por un administrador.")
         self.form_data = {}

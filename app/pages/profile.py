@@ -20,7 +20,7 @@ def profile_page() -> rx.Component:
                             rx.icon("arrow-left", class_name="h-5 w-5 mr-2"),
                             "Volver",
                             on_click=rx.redirect("/"),
-                            class_name="flex items-center text-orange-500 hover:text-orange-600 font-medium mb-6 transition-colors",
+                            class_name="flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium mb-6 transition-colors",
                         ),
                         rx.el.div(
                             rx.el.div(
@@ -39,12 +39,12 @@ def profile_page() -> rx.Component:
                                 ),
                                 rx.el.p(
                                     BookingState.current_professional["title"],
-                                    class_name="text-lg font-medium text-orange-500 mb-4",
+                                    class_name="text-lg font-medium text-blue-600 dark:text-blue-400 mb-4",
                                 ),
                                 rx.el.div(
                                     rx.el.span(
                                         BookingState.current_professional["area"],
-                                        class_name="inline-block bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium",
+                                        class_name="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium dark:bg-blue-900 dark:text-blue-300",
                                     ),
                                     class_name="mb-6",
                                 ),
@@ -80,14 +80,13 @@ def profile_page() -> rx.Component:
                         rx.el.button(
                             "Volver al inicio",
                             on_click=rx.redirect("/"),
-                            class_name="bg-orange-500 text-white font-semibold px-6 py-3 rounded-xl hover:bg-orange-600 transition-colors",
+                            class_name="bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold px-6 py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors",
                         ),
                         class_name="text-center max-w-md mx-auto",
                     ),
                     class_name="container mx-auto px-4 sm:px-6 lg:px-8 py-20",
                 ),
-            ),
-            class_name="min-h-screen bg-gray-50",
+            )
         ),
-        class_name="font-['JetBrains_Mono'] bg-white",
+        class_name="font-['JetBrains_Mono'] bg-gray-50 dark:bg-blue-950 min-h-screen",
     )
