@@ -139,11 +139,42 @@ professionals_data: list[Professional] = [
 AREAS = ["Arquitectura", "Trabajo Social", "Contadores", "Abogados"]
 
 
-class State(rx.State):
-    professionals_by_area: dict[str, list[Professional]] = {
-        area: [p for p in professionals_data if p["area"] == area] for area in AREAS
+def map_professional_to_dict(prof) -> Professional:
+    return {
+        "id": prof.id,
+        "name": prof.name,
+        "photo": prof.photo_profile_path or "/placeholder.svg",
+        "area": prof.career,
+        "title": prof.career,
+        "description": prof.description_services,
+        "city": prof.city or "N/A",
+        "available_hours": [],
     }
+
+
+class State(rx.State):
+    professionals_by_area: dict[str, list[Professional]] = {}
     current_area_index: int = 0
+    all_professionals_db: list[dict] = []
+
+    def _load_professionals_from_db(self):
+        from app.db import Professional as ProfessionalDB
+        from sqlmodel import select
+
+        with rx.session() as session:
+            db_professionals = session.exec(
+                select(ProfessionalDB).where(ProfessionalDB.verified == True)
+            ).all()
+            if db_professionals:
+                self.all_professionals_db = [
+                    map_professional_to_dict(p) for p in db_professionals
+                ]
+            else:
+                self.all_professionals_db = professionals_data
+            self.professionals_by_area = {
+                area: [p for p in self.all_professionals_db if p["area"] == area]
+                for area in AREAS
+            }
 
     @rx.var
     def current_area(self) -> str:
@@ -151,10 +182,14 @@ class State(rx.State):
 
     @rx.var
     def featured_professionals(self) -> list[Professional]:
+        if not self.professionals_by_area:
+            self._load_professionals_from_db()
         return self.professionals_by_area.get(self.current_area, [])[:3]
 
     @rx.event(background=True)
     async def rotate_area(self):
+        async with self:
+            self._load_professionals_from_db()
         while True:
             await asyncio.sleep(5)
             async with self:

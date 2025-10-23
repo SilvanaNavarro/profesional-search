@@ -59,6 +59,7 @@ class ContactState(rx.State):
 
 class SearchState(rx.State):
     professionals: list[dict] = []
+    all_professionals_db: list[dict] = []
     selected_area: str = "Todos"
     search_name: str = ""
     search_city: str = ""
@@ -73,16 +74,29 @@ class SearchState(rx.State):
 
     @rx.var
     def cities(self) -> list[str]:
-        from app.state import professionals_data
-
-        all_cities = {p.get("city") for p in professionals_data if p.get("city")}
+        if not self.all_professionals_db:
+            self.load_professionals()
+        all_cities = {p.get("city") for p in self.all_professionals_db if p.get("city")}
         return sorted(list(all_cities))
 
     @rx.event
     def load_professionals(self):
-        from app.state import professionals_data
+        from app.state import map_professional_to_dict, professionals_data
+        from app.db import Professional as ProfessionalDB
+        from sqlmodel import select
 
-        temp_professionals = professionals_data
+        if not self.all_professionals_db:
+            with rx.session() as session:
+                db_professionals = session.exec(
+                    select(ProfessionalDB).where(ProfessionalDB.verified == True)
+                ).all()
+                if db_professionals:
+                    self.all_professionals_db = [
+                        map_professional_to_dict(p) for p in db_professionals
+                    ]
+                else:
+                    self.all_professionals_db = professionals_data
+        temp_professionals = self.all_professionals_db
         if self.selected_area != "Todos":
             temp_professionals = [
                 p for p in temp_professionals if p["area"] == self.selected_area

@@ -86,6 +86,21 @@ def register_professional_page() -> rx.Component:
                         ),
                         rx.el.div(
                             rx.el.label(
+                                "Ciudad",
+                                class_name="block text-sm font-medium text-gray-700 mb-1",
+                            ),
+                            rx.el.select(
+                                rx.foreach(
+                                    ProfessionalRegisterState.cities,
+                                    lambda city: rx.el.option(city, value=city),
+                                ),
+                                name="city",
+                                placeholder="Selecciona una ciudad",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
+                            ),
+                        ),
+                        rx.el.div(
+                            rx.el.label(
                                 "RUT",
                                 class_name="block text-sm font-medium text-gray-700 mb-1",
                             ),

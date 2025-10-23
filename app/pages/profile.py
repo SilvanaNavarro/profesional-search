@@ -46,6 +46,11 @@ def profile_page() -> rx.Component:
                                         BookingState.current_professional["area"],
                                         class_name="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium dark:bg-blue-900 dark:text-blue-300",
                                     ),
+                                    rx.el.span(
+                                        rx.icon("map-pin", class_name="h-4 w-4 mr-1.5"),
+                                        BookingState.current_professional["city"],
+                                        class_name="inline-flex items-center bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium dark:bg-gray-700 dark:text-gray-300 ml-2",
+                                    ),
                                     class_name="mb-6",
                                 ),
                                 rx.el.p(

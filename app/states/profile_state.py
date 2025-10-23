@@ -60,7 +60,60 @@ class BookingState(rx.State):
 
     @rx.var
     def month_and_year(self) -> str:
-        return self.current_month_display.strftime("%B %Y").capitalize()
+        month_names = [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+        ]
+        month = month_names[self.current_month_display.month - 1]
+        return f"{month} {self.current_month_display.year}"
+
+    @rx.var
+    def formatted_selected_date(self) -> str:
+        if not self.selected_date:
+            return ""
+        try:
+            date_obj = datetime.strptime(self.selected_date, "%Y-%m-%d")
+            day_names = [
+                "Lunes",
+                "Martes",
+                "Miércoles",
+                "Jueves",
+                "Viernes",
+                "Sábado",
+                "Domingo",
+            ]
+            month_names = [
+                "Ene",
+                "Feb",
+                "Mar",
+                "Abr",
+                "May",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dic",
+            ]
+            day_name = day_names[date_obj.weekday()]
+            month_name = month_names[date_obj.month - 1]
+            return f"{day_name}, {date_obj.day} de {month_name} de {date_obj.year}"
+        except ValueError as e:
+            import logging
+
+            logging.exception(f"Error formatting date: {e}")
+            return self.selected_date
 
     @rx.event
     def next_month(self):
