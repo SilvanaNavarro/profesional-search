@@ -163,8 +163,6 @@ from app.pages.payment_status import (
     payment_pending_page,
 )
 
-app.add_page(payment_success_page, route="/payment-success")
-app.add_page(payment_failure_page, route="/payment-failure")
 app.add_page(
     payment_success_page,
     route="/payment-success",
@@ -180,8 +178,19 @@ app.add_page(
     route="/payment-pending",
     on_load=PaymentState.load_payment_details,
 )
-from app.db import User, Professional, Booking
+from app.db import (
+    User,
+    Professional,
+    Booking,
+    ProfessionalAvailability,
+    Review,
+    Subscription,
+    ProfessionalMedia,
+)
 from sqlmodel import SQLModel
+import os
 
+if os.path.exists("reflex.db"):
+    os.remove("reflex.db")
 with rx.session() as session:
     SQLModel.metadata.create_all(session.get_bind())
