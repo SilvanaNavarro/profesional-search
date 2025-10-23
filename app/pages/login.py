@@ -1,0 +1,75 @@
+import reflex as rx
+from app.components.header import header
+from app.states.page_state import LoginState
+
+
+def login_page() -> rx.Component:
+    return rx.el.main(
+        header(),
+        rx.el.div(
+            rx.el.div(
+                rx.el.h1(
+                    "Iniciar Sesión",
+                    class_name="text-3xl font-bold text-gray-800 text-center",
+                ),
+                rx.el.p(
+                    "Accede a tu cuenta para gestionar tus citas.",
+                    class_name="mt-2 text-gray-600 text-center",
+                ),
+                rx.el.div(
+                    rx.el.div(
+                        rx.el.label(
+                            "Correo Electrónico",
+                            class_name="block text-sm font-medium text-gray-700 mb-1",
+                        ),
+                        rx.el.input(
+                            placeholder="tu@email.com",
+                            type="email",
+                            on_change=LoginState.set_email,
+                            class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                        ),
+                        class_name="w-full",
+                    ),
+                    rx.el.div(
+                        rx.el.label(
+                            "Contraseña",
+                            class_name="block text-sm font-medium text-gray-700 mb-1",
+                        ),
+                        rx.el.input(
+                            placeholder="\tu2022\tu2022\tu2022\tu2022\tu2022\tu2022\tu2022\tu2022",
+                            type="password",
+                            on_change=LoginState.set_password,
+                            class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                        ),
+                        class_name="w-full",
+                    ),
+                    rx.cond(
+                        LoginState.error_message != "",
+                        rx.el.div(
+                            rx.icon("flag_triangle_right", class_name="h-4 w-4 mr-2"),
+                            LoginState.error_message,
+                            class_name="bg-red-100 border border-red-200 text-red-700 px-4 py-2 rounded-lg text-sm flex items-center",
+                        ),
+                    ),
+                    rx.el.button(
+                        "Entrar",
+                        on_click=LoginState.handle_login,
+                        class_name="w-full bg-orange-500 text-white font-semibold px-6 py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg",
+                    ),
+                    rx.el.p(
+                        "¿No tienes cuenta? ",
+                        rx.el.a(
+                            "Crea una aquí",
+                            href="/register",
+                            class_name="font-semibold text-orange-500 hover:underline",
+                        ),
+                        class_name="text-center text-sm text-gray-600 pt-4",
+                    ),
+                    class_name="mt-8 space-y-6 w-full",
+                ),
+                class_name="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 max-w-md w-full",
+            ),
+            class_name="flex items-center justify-center min-h-[80vh]",
+        ),
+        class_name="font-['JetBrains_Mono'] bg-gray-50",
+    )

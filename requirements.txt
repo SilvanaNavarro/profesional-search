@@ -1,0 +1,8 @@
+
+reflex==0.8.15a1
+bcrypt
+sqlalchemy
+sqlmodel
+stripe
+mercadopago
+fastapi

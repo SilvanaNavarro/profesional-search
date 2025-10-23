@@ -1,0 +1,52 @@
+import reflex as rx
+
+
+def header() -> rx.Component:
+    nav_links = [
+        {"name": "Sobre Nosotros", "href": "/about"},
+        {"name": "Contáctanos", "href": "/contact"},
+        {"name": "¿Eres Profesional?", "href": "/register-professional"},
+        {"name": "Log in", "href": "/login"},
+        {"name": "Buscar Profesionales", "href": "/search"},
+    ]
+    return rx.el.header(
+        rx.el.div(
+            rx.el.a(
+                rx.el.div(
+                    rx.icon("briefcase", class_name="h-8 w-8 text-orange-500"),
+                    rx.el.div(
+                        rx.el.span(
+                            "ProfessionalBook",
+                            class_name="text-xl font-bold text-gray-800",
+                        ),
+                        rx.el.span(
+                            "Conectamos talento con oportunidades",
+                            class_name="text-xs text-gray-500",
+                        ),
+                        class_name="flex flex-col ml-2",
+                    ),
+                    class_name="flex items-center",
+                ),
+                href="/",
+            ),
+            rx.el.nav(
+                rx.el.div(
+                    rx.foreach(
+                        nav_links,
+                        lambda link: rx.el.a(
+                            link["name"],
+                            href=link["href"],
+                            class_name="text-sm font-medium text-gray-600 hover:text-orange-500 transition-colors px-3 py-2 rounded-md",
+                        ),
+                    ),
+                    class_name="hidden md:flex items-center space-x-2",
+                ),
+                rx.el.button(
+                    rx.icon("menu", class_name="h-6 w-6"),
+                    class_name="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100",
+                ),
+            ),
+            class_name="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20",
+        ),
+        class_name="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200",
+    )
