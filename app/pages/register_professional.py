@@ -41,7 +41,7 @@ def upload_component(
                 "Subir",
                 on_click=handler(rx.upload_files(upload_id=id)),
                 size="1",
-                class_name="mt-2 bg-orange-100 text-orange-600 px-2 py-1 rounded-md text-xs hover:bg-orange-200",
+                class_name="mt-2 bg-blue-100 text-blue-600 px-2 py-1 rounded-md text-xs hover:bg-blue-200",
             ),
         ),
     )
@@ -70,7 +70,7 @@ def register_professional_page() -> rx.Component:
                             rx.el.input(
                                 name="name",
                                 placeholder="Tu nombre y apellido",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -81,7 +81,7 @@ def register_professional_page() -> rx.Component:
                             rx.el.input(
                                 name="career",
                                 placeholder="Ej: Arquitecto, Abogado",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -92,7 +92,7 @@ def register_professional_page() -> rx.Component:
                             rx.el.input(
                                 name="rut",
                                 placeholder="12.345.678-9",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                             ),
                         ),
                         rx.el.div(
@@ -103,7 +103,7 @@ def register_professional_page() -> rx.Component:
                             rx.el.textarea(
                                 name="description_services",
                                 placeholder="Describe brevemente los servicios que ofreces...",
-                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500 h-24",
+                                class_name="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 h-24 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                             ),
                         ),
                         upload_component(
@@ -141,7 +141,7 @@ def register_professional_page() -> rx.Component:
                             "Enviar Registro",
                         ),
                         type="submit",
-                        class_name="w-full bg-orange-500 text-white font-semibold py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg mt-6 flex items-center justify-center",
+                        class_name="w-full bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors shadow-lg mt-6 flex items-center justify-center",
                         disabled=ProfessionalRegisterState.processing,
                     ),
                     on_submit=ProfessionalRegisterState.handle_registration,
@@ -151,7 +151,7 @@ def register_professional_page() -> rx.Component:
                 rx.el.a(
                     "Volver a la página principal",
                     href="/",
-                    class_name="text-center text-sm text-orange-500 hover:underline mt-6 block",
+                    class_name="text-center text-sm text-blue-600 hover:underline dark:text-blue-400 mt-6 block",
                 ),
                 class_name="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 max-w-2xl w-full",
             ),

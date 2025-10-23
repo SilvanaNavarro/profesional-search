@@ -4,10 +4,12 @@ from app.components.header import header
 
 def info_card(icon: str, title: str, text: str) -> rx.Component:
     return rx.el.div(
-        rx.icon(icon, class_name="h-10 w-10 text-orange-500 mb-4"),
-        rx.el.h3(title, class_name="text-xl font-bold text-gray-800 mb-2"),
-        rx.el.p(text, class_name="text-gray-600 leading-relaxed"),
-        class_name="bg-white p-8 rounded-2xl shadow-md border border-gray-100",
+        rx.icon(icon, class_name="h-10 w-10 text-blue-600 dark:text-blue-400 mb-4"),
+        rx.el.h3(
+            title, class_name="text-xl font-bold text-gray-800 dark:text-white mb-2"
+        ),
+        rx.el.p(text, class_name="text-gray-600 dark:text-gray-300 leading-relaxed"),
+        class_name="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md border border-gray-100 dark:border-gray-700",
     )
 
 
@@ -23,9 +25,9 @@ def about_page() -> rx.Component:
                     ),
                     rx.el.p(
                         "Conectando talento con oportunidades, de forma simple y segura.",
-                        class_name="mt-4 max-w-2xl mx-auto text-center text-lg text-gray-600 font-medium",
+                        class_name="mt-4 max-w-2xl mx-auto text-center text-lg text-gray-600 dark:text-gray-300 font-medium",
                     ),
-                    class_name="py-16 bg-orange-50 rounded-3xl",
+                    class_name="py-16 bg-blue-50 dark:bg-blue-900/50 rounded-3xl",
                 ),
                 class_name="container mx-auto px-4 sm:px-6 lg:px-8 pt-8",
             ),
@@ -51,5 +53,5 @@ def about_page() -> rx.Component:
                 class_name="container mx-auto px-4 sm:px-6 lg:px-8 py-16",
             ),
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50",
+        class_name="font-['JetBrains_Mono'] bg-gray-50 dark:bg-blue-950",
     )

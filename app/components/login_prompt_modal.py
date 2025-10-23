@@ -10,8 +10,7 @@ def login_prompt_modal() -> rx.Component:
                 rx.el.div(
                     rx.el.div(
                         rx.icon(
-                            "log_in",
-                            class_name="h-16 w-16 text-orange-500 mx-auto mb-4",
+                            "log_in", class_name="h-16 w-16 text-blue-600 mx-auto mb-4"
                         ),
                         rx.el.h2(
                             "Iniciar Sesión para Reservar",
@@ -36,7 +35,7 @@ def login_prompt_modal() -> rx.Component:
                                 f"⏰ {BookingState.selected_date} a las {BookingState.selected_time}",
                                 class_name="font-semibold text-gray-800 text-lg",
                             ),
-                            class_name="bg-orange-50 p-4 rounded-xl border border-orange-200 mb-6 text-center",
+                            class_name="bg-blue-50 p-4 rounded-xl border border-blue-200 mb-6 text-center",
                         ),
                         rx.el.div(
                             rx.el.button(
@@ -47,7 +46,7 @@ def login_prompt_modal() -> rx.Component:
                             rx.el.button(
                                 "Iniciar Sesión o Registrarse",
                                 on_click=BookingState.redirect_to_login,
-                                class_name="bg-orange-500 text-white font-semibold px-6 py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg",
+                                class_name="bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold px-6 py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors shadow-lg",
                             ),
                             class_name="flex justify-center gap-4",
                         ),

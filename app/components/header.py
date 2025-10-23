@@ -13,7 +13,10 @@ def header() -> rx.Component:
         rx.el.div(
             rx.el.a(
                 rx.el.div(
-                    rx.icon("briefcase", class_name="h-8 w-8 text-orange-500"),
+                    rx.icon(
+                        "briefcase",
+                        class_name="h-8 w-8 text-blue-600 dark:text-blue-400",
+                    ),
                     rx.el.div(
                         rx.el.span(
                             "ProfessionalBook",
@@ -36,12 +39,14 @@ def header() -> rx.Component:
                         lambda link: rx.el.a(
                             link["name"],
                             href=link["href"],
-                            class_name="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-orange-500 transition-colors px-3 py-2 rounded-md",
+                            class_name="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-3 py-2 rounded-md",
                         ),
                     ),
                     rx.el.button(
-                        rx.icon(ThemeState.icon, class_name="h-5 w-5"),
-                        on_click=ThemeState.toggle_dark_mode,
+                        rx.icon(
+                            rx.color_mode_cond("moon", "sun"), class_name="h-5 w-5"
+                        ),
+                        on_click=rx.toggle_color_mode,
                         class_name="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700",
                     ),
                     rx.el.a(

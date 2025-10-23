@@ -24,13 +24,13 @@ def verify_email_page() -> rx.Component:
                     rx.el.input(
                         placeholder="_ _ _ _ _ _",
                         on_change=VerifyEmailState.set_code,
-                        class_name="w-full text-center tracking-[1.5em] text-2xl font-semibold p-4 border border-gray-300 rounded-lg focus:ring-orange-500 focus:border-orange-500",
+                        class_name="w-full text-center tracking-[1.5em] text-2xl font-semibold p-4 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white",
                         max_length=6,
                     ),
                     rx.el.button(
                         "Verificar Cuenta",
                         on_click=lambda: AuthState.verify_email(VerifyEmailState.code),
-                        class_name="w-full bg-orange-500 text-white font-semibold py-3 rounded-xl hover:bg-orange-600 transition-colors shadow-lg mt-6",
+                        class_name="w-full bg-gradient-to-r from-blue-700 to-green-500 text-white font-semibold py-3 rounded-xl hover:from-blue-600 hover:to-green-400 transition-colors shadow-lg mt-6",
                     ),
                     rx.cond(
                         AuthState.error_message != "",

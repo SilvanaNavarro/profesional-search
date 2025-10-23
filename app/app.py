@@ -110,9 +110,8 @@ def webhook(payload: dict) -> dict:
 
 
 app = rx.App(
-    theme=rx.theme(appearance="light", accent_color="orange"),
+    theme=rx.theme(appearance="light", accent_color="grass"),
     head_components=[
-        rx.el.script(src="/theme.js"),
         rx.el.link(rel="preconnect", href="https://fonts.googleapis.com"),
         rx.el.link(rel="preconnect", href="https://fonts.gstatic.com", cross_origin=""),
         rx.el.link(
@@ -120,7 +119,6 @@ app = rx.App(
             rel="stylesheet",
         ),
     ],
-    api_transformer=api,
 )
 app.add_page(index, route="/")
 app.add_page(

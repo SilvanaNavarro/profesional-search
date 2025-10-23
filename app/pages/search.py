@@ -25,8 +25,8 @@ def search_page() -> rx.Component:
                             on_click=lambda: SearchState.set_selected_area(area),
                             class_name=rx.cond(
                                 SearchState.selected_area == area,
-                                "px-4 py-2 bg-orange-500 text-white rounded-lg font-medium shadow-md",
-                                "px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-orange-50",
+                                "px-4 py-2 bg-gradient-to-r from-blue-700 to-green-500 text-white rounded-lg font-medium shadow-md",
+                                "px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-blue-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700",
                             ),
                         ),
                     ),
