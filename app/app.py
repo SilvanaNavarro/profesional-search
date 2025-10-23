@@ -47,7 +47,7 @@ def index() -> rx.Component:
             class_name="py-20 bg-gray-50 dark:bg-blue-900",
         ),
         video_section(),
-        class_name="font-['JetBrains_Mono'] bg-white dark:bg-blue-900",
+        class_name="font-['JetBrains_Mono'] bg-white dark:bg-blue-950",
         on_mount=State.rotate_area,
     )
 

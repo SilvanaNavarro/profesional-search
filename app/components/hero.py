@@ -31,5 +31,5 @@ def hero_section() -> rx.Component:
             ),
             class_name="relative container mx-auto px-4 sm:px-6 lg:px-8 z-10",
         ),
-        class_name="relative flex items-center justify-center min-h-[60vh] py-20 bg-gray-50 overflow-hidden",
+        class_name="relative flex items-center justify-center min-h-[60vh] py-20 bg-gray-50 dark:bg-blue-950 overflow-hidden",
     )

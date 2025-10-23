@@ -63,5 +63,5 @@ def professional_carousel() -> rx.Component:
             ),
             class_name="container mx-auto px-4 sm:px-6 lg:px-8",
         ),
-        class_name="py-20 bg-gray-50",
+        class_name="py-20 bg-gray-50 dark:bg-gray-800",
     )

@@ -45,5 +45,5 @@ def verify_email_page() -> rx.Component:
             ),
             class_name="container mx-auto px-4 py-16",
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50 dark:bg-blue-950 min-h-screen",
+        class_name="font-['JetBrains_Mono'] bg-white dark:bg-blue-950 min-h-screen",
     )
