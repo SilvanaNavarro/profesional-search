@@ -87,7 +87,7 @@ def profile_page() -> rx.Component:
                     class_name="container mx-auto px-4 sm:px-6 lg:px-8 py-20",
                 ),
             ),
-            class_name="min-h-screen bg-gray-50",
+            class_name="min-h-screen bg-gray-50 dark:bg-blue-950",
         ),
-        class_name="font-['JetBrains_Mono'] bg-white",
+        class_name="font-['JetBrains_Mono'] bg-white dark:bg-blue-950",
     )

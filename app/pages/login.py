@@ -71,5 +71,5 @@ def login_page() -> rx.Component:
             ),
             class_name="flex items-center justify-center min-h-[80vh]",
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50",
+        class_name="font-['JetBrains_Mono'] bg-gray-50 dark:bg-blue-950",
     )

@@ -40,5 +40,5 @@ def search_page() -> rx.Component:
             ),
             class_name="container mx-auto px-4 sm:px-6 lg:px-8 py-8",
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50 min-h-screen",
+        class_name="font-['JetBrains_Mono'] bg-gray-50 dark:bg-blue-950 min-h-screen",
     )

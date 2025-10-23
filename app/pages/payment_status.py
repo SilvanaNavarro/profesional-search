@@ -88,7 +88,7 @@ def status_page_layout(
             ),
             class_name="flex items-center justify-center min-h-[80vh]",
         ),
-        class_name="font-['JetBrains_Mono'] bg-gray-50",
+        class_name="font-['JetBrains_Mono'] bg-gray-50 dark:bg-blue-950",
         on_mount=PaymentState.load_payment_details,
     )
 
