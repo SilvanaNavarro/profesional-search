@@ -10,6 +10,7 @@ class Professional(TypedDict):
     area: str
     title: str
     description: str
+    city: str
     available_hours: list[str]
 
 
@@ -21,6 +22,7 @@ professionals_data: list[Professional] = [
         "area": "Arquitectura",
         "title": "Arquitecta Senior",
         "description": "Más de 15 años de experiencia en diseño sostenible y planificación urbana.",
+        "city": "Santiago",
         "available_hours": ["09:00", "11:00", "14:00"],
     },
     {
@@ -30,6 +32,7 @@ professionals_data: list[Professional] = [
         "area": "Arquitectura",
         "title": "Especialista en Interiores",
         "description": "Creatividad y funcionalidad en cada espacio. Proyectos residenciales y comerciales.",
+        "city": "Valparaíso",
         "available_hours": ["10:00", "12:00", "16:00"],
     },
     {
@@ -39,6 +42,7 @@ professionals_data: list[Professional] = [
         "area": "Arquitectura",
         "title": "Urbanista",
         "description": "Planificación de ciudades inteligentes y desarrollo comunitario.",
+        "city": "Concepción",
         "available_hours": ["09:30", "11:30", "15:00"],
     },
     {
@@ -48,6 +52,7 @@ professionals_data: list[Professional] = [
         "area": "Trabajo Social",
         "title": "Trabajador Social Clínico",
         "description": "Apoyo emocional y terapia para individuos y familias. Especializado en salud mental.",
+        "city": "Santiago",
         "available_hours": ["08:00", "10:00", "13:00"],
     },
     {
@@ -57,6 +62,7 @@ professionals_data: list[Professional] = [
         "area": "Trabajo Social",
         "title": "Consejero Familiar",
         "description": "Mediación y resolución de conflictos en el ámbito familiar y de pareja.",
+        "city": "La Serena",
         "available_hours": ["14:00", "16:00", "18:00"],
     },
     {
@@ -66,6 +72,7 @@ professionals_data: list[Professional] = [
         "area": "Trabajo Social",
         "title": "Especialista en Adicciones",
         "description": "Programas de intervención y prevención para superar adicciones.",
+        "city": "Antofagasta",
         "available_hours": ["09:00", "11:00", "17:00"],
     },
     {
@@ -73,8 +80,9 @@ professionals_data: list[Professional] = [
         "name": "Mariana Diaz",
         "photo": "/accountant-1.jpg",
         "area": "Contadores",
-        "title": "Contadora Pública Certificada",
+        "title": "Contadora Póblica Certificada",
         "description": "Asesoría fiscal y financiera para pequeñas y medianas empresas. Optimización de impuestos.",
+        "city": "Santiago",
         "available_hours": ["10:00", "13:00", "15:00"],
     },
     {
@@ -84,6 +92,7 @@ professionals_data: list[Professional] = [
         "area": "Contadores",
         "title": "Auditor Financiero",
         "description": "Auditorías internas y externas para garantizar la transparencia y el cumplimiento.",
+        "city": "Concepción",
         "available_hours": ["09:00", "12:00", "14:00"],
     },
     {
@@ -93,6 +102,7 @@ professionals_data: list[Professional] = [
         "area": "Contadores",
         "title": "Consultora Fiscal",
         "description": "Estrategias fiscales personalizadas para individuos y corporaciones.",
+        "city": "Valparaíso",
         "available_hours": ["11:00", "14:00", "16:00"],
     },
     {
@@ -102,6 +112,7 @@ professionals_data: list[Professional] = [
         "area": "Abogados",
         "title": "Abogado Corporativo",
         "description": "Experto en derecho mercantil, fusiones, adquisiciones y contratos complejos.",
+        "city": "Santiago",
         "available_hours": ["10:30", "12:30", "15:30"],
     },
     {
@@ -111,6 +122,7 @@ professionals_data: list[Professional] = [
         "area": "Abogados",
         "title": "Abogada de Familia",
         "description": "Representación legal en casos de divorcio, custodia y herencias.",
+        "city": "Concepción",
         "available_hours": ["09:00", "11:00", "14:00"],
     },
     {
@@ -120,6 +132,7 @@ professionals_data: list[Professional] = [
         "area": "Abogados",
         "title": "Abogado Penalista",
         "description": "Defensa legal en casos penales, con un alto índice de éxito.",
+        "city": "Antofagasta",
         "available_hours": ["13:00", "15:00", "17:00"],
     },
 ]

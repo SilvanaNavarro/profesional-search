@@ -60,6 +60,9 @@ class ContactState(rx.State):
 class SearchState(rx.State):
     professionals: list[dict] = []
     selected_area: str = "Todos"
+    search_name: str = ""
+    search_city: str = ""
+    search_radius: int = 50
     AREAS: list[str] = [
         "Todos",
         "Arquitectura",
@@ -68,18 +71,57 @@ class SearchState(rx.State):
         "Abogados",
     ]
 
+    @rx.var
+    def cities(self) -> list[str]:
+        from app.state import professionals_data
+
+        all_cities = {p.get("city") for p in professionals_data if p.get("city")}
+        return sorted(list(all_cities))
+
     @rx.event
     def load_professionals(self):
         from app.state import professionals_data
 
-        if self.selected_area == "Todos":
-            self.professionals = professionals_data
-        else:
-            self.professionals = [
-                p for p in professionals_data if p["area"] == self.selected_area
+        temp_professionals = professionals_data
+        if self.selected_area != "Todos":
+            temp_professionals = [
+                p for p in temp_professionals if p["area"] == self.selected_area
             ]
+        if self.search_name:
+            temp_professionals = [
+                p
+                for p in temp_professionals
+                if self.search_name.lower() in p["name"].lower()
+            ]
+        if self.search_city:
+            temp_professionals = [
+                p for p in temp_professionals if p.get("city") == self.search_city
+            ]
+        self.professionals = temp_professionals
 
     @rx.event
     def set_selected_area(self, area: str):
         self.selected_area = area
-        return SearchState.load_professionals
+        self.load_professionals()
+
+    @rx.event
+    def set_search_name(self, name: str):
+        self.search_name = name
+        self.load_professionals()
+
+    @rx.event
+    def set_search_city(self, city: str):
+        self.search_city = city
+        self.load_professionals()
+
+    @rx.event
+    def set_search_radius(self, radius: list[int]):
+        self.search_radius = radius[0]
+
+    @rx.event
+    def clear_filters(self):
+        self.selected_area = "Todos"
+        self.search_name = ""
+        self.search_city = ""
+        self.search_radius = 50
+        self.load_professionals()
