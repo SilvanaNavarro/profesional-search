@@ -53,62 +53,10 @@ def index() -> rx.Component:
 
 
 from fastapi import FastAPI
+from app.api import webhook_router
 
 api = FastAPI()
-
-
-@api.post("/webhook/mercadopago")
-def webhook(payload: dict) -> dict:
-    import logging
-    from app.payment_service import PaymentService
-    from app.db import Booking, User, Professional
-    from app.email_service import send_booking_confirmation_email
-    from sqlmodel import select
-
-    logging.info("Webhook recibido de Mercado Pago")
-    if payload.get("type") == "payment":
-        payment_id = payload["data"]["id"]
-        logging.info(f"Procesando notificacicdn para el pago ID: {payment_id}")
-        payment_service = PaymentService()
-        payment_info = payment_service.get_payment(payment_id)
-        if not payment_info or payment_info["status"] != 200:
-            logging.error("No se pudo obtener la informacicdn del pago.")
-            return {"status": "error", "message": "Payment not found"}
-        payment = payment_info["response"]
-        booking_id = payment.get("external_reference")
-        payment_status = payment.get("status")
-        if not booking_id:
-            logging.error("No se encontrcd external_reference en el pago.")
-            return {"status": "error", "message": "Missing external reference"}
-        with rx.session() as session:
-            booking = session.get(Booking, int(booking_id))
-            if not booking:
-                logging.error(f"No se encontrcd la reserva con ID: {booking_id}")
-                return {"status": "error", "message": "Booking not found"}
-            if booking.payment_status == "approved":
-                logging.warning(
-                    f"La reserva {booking_id} ya fue aprobada. Ignorando notificacicdn."
-                )
-                return {"status": "ok", "message": "Already processed"}
-            booking.payment_status = payment_status
-            session.add(booking)
-            session.commit()
-            logging.info(f"Reserva {booking_id} actualizada a estado: {payment_status}")
-            if payment_status == "approved":
-                user = session.get(User, booking.user_id)
-                professional = session.get(Professional, booking.professional_id)
-                if user and professional:
-                    logging.info(f"Enviando email de confirmacicdn a {user.email}")
-                    send_booking_confirmation_email(
-                        to_email=user.email,
-                        user_name=user.name,
-                        professional_name=professional.name,
-                        date=booking.date,
-                        time=booking.time,
-                    )
-    return {"status": "ok"}
-
-
+api.include_router(webhook_router.router, prefix="/webhook", tags=["MercadoPago"])
 app = rx.App(
     theme=rx.theme(appearance="light", accent_color="grass"),
     stylesheets=["/styles.css"],

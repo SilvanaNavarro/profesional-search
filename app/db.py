@@ -84,3 +84,13 @@ class ProfessionalMedia(SQLModel, table=True):
     media_type: str
     file_path: str
     description: Optional[str] = None
+
+
+from sqlmodel import create_engine
+
+engine = create_engine("sqlite:///reflex.db")
+
+
+def get_session():
+    with Session(engine) as session:
+        yield session

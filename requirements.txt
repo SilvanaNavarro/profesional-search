@@ -6,3 +6,4 @@ sqlmodel
 stripe
 mercadopago
 fastapi
+resend
